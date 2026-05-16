@@ -31,7 +31,7 @@ module.exports = {
       symbol: "$",
     },
     locale: "en-US",
-    channel: '{"salesChannel":"1","regionId":""}',
+    channel: '{"salesChannel":"1","regionId":"","hasOnlyDefaultSalesChannel":"true"}',
     country: "CHL",
     deliveryMode: null,
     addressType: null,
@@ -48,17 +48,17 @@ module.exports = {
   },
 
   // Production URLs
-  storeUrl: "https://www.fast.store",
-  secureSubdomain: "https://www.fast.store/",
-  checkoutUrl: "https://www.fast.store/checkout",
-  loginUrl: "https://www.fast.store/api/io/login",
-  accountUrl: "https://www.fast.store/api/io/account",
+  storeUrl: "https://eduardofuentes.myvtex.com",
+  secureSubdomain: "https://eduardofuentes.myvtex.com",
+  checkoutUrl: "https://eduardofuentes.myvtex.com/checkout",
+  loginUrl: "https://eduardofuentes.myvtex.com/api/io/login",
+  accountUrl: "https://eduardofuentes.myvtex.com/api/io/account",
 
   previewRedirects: {
     home: "/",
-    plp: "/headphones",
-    search: "/s?q=Newstore",
-    pdp: "/headphone-white-10000006/p",
+    plp: "/s?q=trioval",
+    search: "/s?q=trioval",
+    pdp: "/trioval/p",
   },
 
   // Lighthouse CI
@@ -66,8 +66,8 @@ module.exports = {
     server: process.env.BASE_SITE_URL || "http://localhost:3000",
     pages: {
       home: "/",
-      pdp: "/headphone-white-10000006/p",
-      collection: "/headphones",
+      pdp: "/trioval/p",
+      collection: "/s?q=trioval",
     },
   },
 
@@ -75,18 +75,17 @@ module.exports = {
   cypress: {
     pages: {
       home: "/",
-      pdp: "/headphone-white-10000006/p",
-      collection: "/headphones",
-      collection_filtered:
-        "/headphones?category-1=headphones&fuzzy=0&operator=and&facets=category-1%2Cfuzzy%2Coperator&sort=score_desc&page=0",
-      search: "/s?q=Newstore",
+      pdp: "/trioval/p",
+      collection: "/s?q=trioval",
+      collection_filtered: "/s?q=trioval",
+      search: "/s?q=trioval",
     },
     browser: "electron",
   },
 
   analytics: {
     // https://developers.google.com/tag-platform/tag-manager/web#standard_web_page_installation,
-    gtmContainerId: "GTM-1234567",
+    gtmContainerId: "",
   },
 
   experimental: {
@@ -96,6 +95,6 @@ module.exports = {
   },
 
   vtexHeadlessCms: {
-    webhookUrls: ["https://newstore.myvtex.com/cms-releases/webhook-releases"],
+    webhookUrls: ["https://eduardofuentes.myvtex.com/cms-releases/webhook-releases"],
   },
 };
