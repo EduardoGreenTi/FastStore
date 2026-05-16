@@ -1,0 +1,35 @@
+diff --git a/node_modules/@faststore/core/src/components/sections/ProductTiles/ProductTiles.tsx b/node_modules/@faststore/core/src/components/sections/ProductTiles/ProductTiles.tsx
+index 6b1d70f..fa44817 100644
+--- a/node_modules/@faststore/core/src/components/sections/ProductTiles/ProductTiles.tsx
++++ b/node_modules/@faststore/core/src/components/sections/ProductTiles/ProductTiles.tsx
+@@ -78,7 +78,7 @@ const ProductTiles = ({
+     ),
+   })
+   const products = data?.search?.products
+-  const productEdges = products?.edges ?? []
++  const productEdges = (products?.edges ?? []).slice(0, 4)
+ 
+   const { sendViewItemListEvent } = useViewItemListEvent({
+     products: productEdges,
+@@ -95,7 +95,7 @@ const ProductTiles = ({
+     }
+   }, [inView, productEdges.length, sendViewItemListEvent])
+ 
+-  if (products?.edges.length === 0) {
++  if (products && productEdges.length < 2) {
+     return null
+   }
+ 
+diff --git a/node_modules/@faststore/core/src/sdk/analytics/platform/vtex/search.ts b/node_modules/@faststore/core/src/sdk/analytics/platform/vtex/search.ts
+index 9f8ae79..453f65b 100644
+--- a/node_modules/@faststore/core/src/sdk/analytics/platform/vtex/search.ts
++++ b/node_modules/@faststore/core/src/sdk/analytics/platform/vtex/search.ts
+@@ -109,7 +109,7 @@ const sendEvent = (options: SearchEvent & { url?: string }) => {
+     headers: {
+       'content-type': 'application/json',
+     },
+-  })
++  }).catch(() => {})
+ }
+ 
+ const isFullTextSearch = (url: URL) =>

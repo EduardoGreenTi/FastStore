@@ -4,6 +4,7 @@
   "description": "FastStore Base Starter",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "dev": "faststore dev",
     "build": "faststore build",
     "start": "faststore start",
@@ -23,6 +24,7 @@
     "cypress": "12.17.4",
     "cypress-axe": "^1.5.0",
     "cypress-wait-until": "^2.0.1",
+    "patch-package": "^8.0.1",
     "typescript": "^5.9.3"
   },
   "volta": {
