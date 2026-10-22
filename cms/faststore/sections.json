@@ -1,0 +1,80 @@
+[
+  {
+    "name": "BenefitsBar",
+    "requiredScopes": [],
+    "schema": {
+      "title": "Franja de beneficios",
+      "description": "Franja con beneficios y contador regresivo opcional (ej: Black Friday)",
+      "type": "object",
+      "properties": {
+        "benefits": {
+          "title": "Beneficios",
+          "type": "array",
+          "items": {
+            "title": "Beneficio",
+            "type": "object",
+            "required": ["text"],
+            "properties": {
+              "icon": {
+                "title": "Ícono",
+                "type": "string",
+                "enumNames": [
+                  "Camión (envío)",
+                  "Escudo (compra segura)",
+                  "Flechas (cambios)",
+                  "Regalo",
+                  "Etiqueta (descuento)",
+                  "Medalla",
+                  "Tienda (retiro)",
+                  "Calendario",
+                  "Estrella"
+                ],
+                "enum": [
+                  "Truck",
+                  "ShieldCheck",
+                  "ArrowsClockwise",
+                  "Gift",
+                  "Tag",
+                  "Medal",
+                  "Storefront",
+                  "Calendar",
+                  "Star"
+                ]
+              },
+              "text": {
+                "title": "Texto",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "countdown": {
+          "title": "Contador regresivo",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "title": "¿Mostrar contador?",
+              "type": "boolean",
+              "default": false
+            },
+            "title": {
+              "title": "Título",
+              "description": "Ej: Black Friday termina en",
+              "type": "string"
+            },
+            "endDate": {
+              "title": "Fecha de término",
+              "description": "Formato ISO 8601 con zona horaria. Ej: 2026-11-27T23:59:59-03:00",
+              "type": "string"
+            },
+            "finishedText": {
+              "title": "Texto al terminar",
+              "description": "Se muestra cuando el contador llega a cero. Si se deja vacío, el contador se oculta.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+]
