@@ -7,13 +7,50 @@
       "description": "Franja con beneficios y contador regresivo opcional (ej: Black Friday)",
       "type": "object",
       "properties": {
+        "appearance": {
+          "title": "Apariencia",
+          "type": "object",
+          "properties": {
+            "variant": {
+              "title": "Estilo",
+              "type": "string",
+              "enum": [
+                "dark",
+                "brand",
+                "light",
+                "highlight"
+              ],
+              "enumNames": [
+                "Oscuro",
+                "Color de marca",
+                "Claro",
+                "Destacado"
+              ],
+              "default": "dark"
+            },
+            "backgroundColor": {
+              "title": "Color de fondo personalizado",
+              "description": "Opcional. Hex, ej: #E30613. Reemplaza el color del estilo",
+              "type": "string",
+              "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+            },
+            "textColor": {
+              "title": "Color de texto personalizado",
+              "description": "Opcional. Hex, ej: #FFFFFF. Reemplaza el color del estilo",
+              "type": "string",
+              "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+            }
+          }
+        },
         "benefits": {
           "title": "Beneficios",
           "type": "array",
           "items": {
             "title": "Beneficio",
             "type": "object",
-            "required": ["text"],
+            "required": [
+              "text"
+            ],
             "properties": {
               "icon": {
                 "title": "Ícono",
@@ -46,7 +83,8 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "description": "Cada beneficio se muestra con su ícono. Una franja sin beneficios y sin contador activo no se muestra."
         },
         "countdown": {
           "title": "Contador regresivo",
@@ -62,14 +100,51 @@
               "description": "Ej: Black Friday termina en",
               "type": "string"
             },
-            "endDate": {
+            "date": {
               "title": "Fecha de término",
-              "description": "Formato ISO 8601 con zona horaria. Ej: 2026-11-27T23:59:59-03:00",
-              "type": "string"
+              "description": "Día en que termina el evento",
+              "type": "string",
+              "format": "date"
+            },
+            "time": {
+              "title": "Hora de término",
+              "description": "Formato 24 h (HH:MM). Termina al final de ese minuto. Si se deja vacío: 23:59",
+              "type": "string",
+              "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+              "default": "23:59"
+            },
+            "timeZone": {
+              "title": "Zona horaria",
+              "description": "La fecha y hora se interpretan en esta zona horaria (considera horario de verano)",
+              "type": "string",
+              "enum": [
+                "America/Santiago",
+                "America/Bogota",
+                "America/Lima",
+                "America/Mexico_City",
+                "America/Argentina/Buenos_Aires",
+                "America/Sao_Paulo",
+                "UTC"
+              ],
+              "enumNames": [
+                "Chile (Santiago)",
+                "Colombia (Bogotá)",
+                "Perú (Lima)",
+                "México (Ciudad de México)",
+                "Argentina (Buenos Aires)",
+                "Brasil (São Paulo)",
+                "UTC"
+              ],
+              "default": "America/Santiago"
             },
             "finishedText": {
               "title": "Texto al terminar",
               "description": "Se muestra cuando el contador llega a cero. Si se deja vacío, el contador se oculta.",
+              "type": "string"
+            },
+            "endDate": {
+              "title": "Fecha ISO (avanzado)",
+              "description": "Solo se usa si \"Fecha de término\" está vacía. Formato ISO 8601 con zona horaria. Ej: 2026-11-27T23:59:59-03:00",
               "type": "string"
             }
           }

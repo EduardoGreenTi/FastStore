@@ -1,8 +1,27 @@
 @layer components {
   .benefitsBar {
+    // Preset colors; custom hex colors from the CMS override these inline
+    --benefits-bar-bg: var(--fs-color-neutral-7);
+    --benefits-bar-text: var(--fs-color-text-inverse);
+
     padding-block: var(--fs-spacing-1);
-    color: var(--fs-color-text-inverse);
-    background-color: var(--fs-color-neutral-7);
+    color: var(--benefits-bar-text);
+    background-color: var(--benefits-bar-bg);
+
+    &[data-benefits-bar-variant="brand"] {
+      --benefits-bar-bg: var(--fs-color-primary-bkg);
+      --benefits-bar-text: var(--fs-color-primary-text);
+    }
+
+    &[data-benefits-bar-variant="light"] {
+      --benefits-bar-bg: var(--fs-color-neutral-1);
+      --benefits-bar-text: var(--fs-color-text);
+    }
+
+    &[data-benefits-bar-variant="highlight"] {
+      --benefits-bar-bg: var(--fs-color-highlighted-bkg);
+      --benefits-bar-text: var(--fs-color-highlighted-text);
+    }
 
     [data-benefits-bar-content] {
       display: flex;
@@ -33,8 +52,8 @@
     [data-benefits-bar-timer-unit] {
       padding: var(--fs-spacing-0) var(--fs-spacing-1);
       font-size: var(--fs-text-size-1);
-      color: var(--fs-color-text);
-      background-color: var(--fs-color-neutral-0);
+      color: var(--benefits-bar-bg);
+      background-color: var(--benefits-bar-text);
       border-radius: var(--fs-border-radius);
 
       small {
