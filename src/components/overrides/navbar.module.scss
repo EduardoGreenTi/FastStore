@@ -1,0 +1,6 @@
+@layer components {
+  // --benefits-bar-offset is the total height of sticky BenefitsBar sections
+  .navbar:global(.section-navbar) {
+    top: var(--benefits-bar-offset, 0px);
+  }
+}

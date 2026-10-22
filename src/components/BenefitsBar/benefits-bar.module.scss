@@ -1,0 +1,93 @@
+@layer components {
+  .benefitsBar {
+    // Preset colors; custom hex colors from the CMS override these inline
+    --benefits-bar-bg: var(--fs-color-neutral-7);
+    --benefits-bar-text: var(--fs-color-text-inverse);
+
+    padding-block: var(--fs-spacing-1);
+    color: var(--benefits-bar-text);
+    background-color: var(--benefits-bar-bg);
+
+    // `top` is set inline so multiple sticky bars stack
+    &[data-benefits-bar-sticky] {
+      position: sticky;
+      top: 0;
+      z-index: var(--fs-z-index-high);
+    }
+
+    &[data-benefits-bar-variant="brand"] {
+      --benefits-bar-bg: var(--fs-color-primary-bkg);
+      --benefits-bar-text: var(--fs-color-primary-text);
+    }
+
+    &[data-benefits-bar-variant="light"] {
+      --benefits-bar-bg: var(--fs-color-neutral-1);
+      --benefits-bar-text: var(--fs-color-text);
+    }
+
+    &[data-benefits-bar-variant="highlight"] {
+      --benefits-bar-bg: var(--fs-color-highlighted-bkg);
+      --benefits-bar-text: var(--fs-color-highlighted-text);
+    }
+
+    [data-benefits-bar-content] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--fs-spacing-1) var(--fs-spacing-4);
+      align-items: center;
+      justify-content: center;
+    }
+
+    [data-benefits-bar-countdown] {
+      display: flex;
+      gap: var(--fs-spacing-2);
+      align-items: center;
+      font-weight: var(--fs-text-weight-bold);
+    }
+
+    [data-benefits-bar-countdown-title] {
+      font-size: var(--fs-text-size-1);
+      text-transform: uppercase;
+    }
+
+    [data-benefits-bar-timer] {
+      display: flex;
+      gap: var(--fs-spacing-1);
+      font-variant-numeric: tabular-nums;
+    }
+
+    [data-benefits-bar-timer-unit] {
+      padding: var(--fs-spacing-0) var(--fs-spacing-1);
+      font-size: var(--fs-text-size-1);
+      color: var(--benefits-bar-bg);
+      background-color: var(--benefits-bar-text);
+      border-radius: var(--fs-border-radius);
+
+      small {
+        margin-left: 1px;
+        font-size: var(--fs-text-size-tiny);
+        font-weight: var(--fs-text-weight-regular);
+      }
+    }
+
+    [data-benefits-bar-list] {
+      display: flex;
+      gap: var(--fs-spacing-4);
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+      overflow-x: auto;
+      list-style: none;
+      scrollbar-width: none;
+    }
+
+    [data-benefits-bar-item] {
+      display: flex;
+      flex-shrink: 0;
+      gap: var(--fs-spacing-1);
+      align-items: center;
+      font-size: var(--fs-text-size-legend);
+      white-space: nowrap;
+    }
+  }
+}
