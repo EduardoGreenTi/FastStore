@@ -8,6 +8,13 @@
     color: var(--benefits-bar-text);
     background-color: var(--benefits-bar-bg);
 
+    // `top` is set inline so multiple sticky bars stack
+    &[data-benefits-bar-sticky] {
+      position: sticky;
+      top: 0;
+      z-index: var(--fs-z-index-high);
+    }
+
     &[data-benefits-bar-variant="brand"] {
       --benefits-bar-bg: var(--fs-color-primary-bkg);
       --benefits-bar-text: var(--fs-color-primary-text);

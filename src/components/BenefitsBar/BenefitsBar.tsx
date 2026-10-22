@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { Icon as UIIcon } from '@faststore/ui'
 
@@ -23,6 +23,7 @@ interface Countdown {
 type Variant = 'dark' | 'brand' | 'light' | 'highlight'
 
 interface Appearance {
+  sticky?: boolean
   variant?: Variant
   backgroundColor?: string
   textColor?: string
@@ -148,6 +149,47 @@ function useCountdown(endTime: number) {
   return { timeLeft, isMounted }
 }
 
+// Stacks every sticky bar below the previous ones and exposes the total
+// height as --benefits-bar-offset, used by the Navbar override
+function updateStickyOffsets() {
+  const bars = document.querySelectorAll<HTMLElement>(
+    '[data-benefits-bar-sticky]'
+  )
+  let offset = 0
+
+  bars.forEach((bar) => {
+    bar.style.top = `${offset}px`
+    offset += bar.offsetHeight
+  })
+
+  document.documentElement.style.setProperty(
+    '--benefits-bar-offset',
+    `${offset}px`
+  )
+}
+
+function useStickyStack(isSticky: boolean, isRendered: boolean) {
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const element = ref.current
+
+    if (!isSticky || !isRendered || !element) return
+
+    // Recalculates when this bar's height changes (wrapping, countdown end)
+    const observer = new ResizeObserver(updateStickyOffsets)
+    observer.observe(element)
+
+    return () => {
+      observer.disconnect()
+      // Wait until the element leaves the DOM before recalculating
+      requestAnimationFrame(updateStickyOffsets)
+    }
+  }, [isSticky, isRendered])
+
+  return ref
+}
+
 function getColorStyle({ backgroundColor, textColor }: Appearance = {}) {
   const style: Record<string, string> = {}
 
@@ -177,12 +219,18 @@ function BenefitsBar({
   const showCountdown =
     isCountdownEnabled && (!isFinished || Boolean(countdown?.finishedText))
 
-  if (!benefits.length && !showCountdown) return null
+  const isRendered = benefits.length > 0 || showCountdown
+  const isSticky = appearance?.sticky ?? true
+  const ref = useStickyStack(isSticky, isRendered)
+
+  if (!isRendered) return null
 
   return (
     <section
+      ref={ref}
       className={`section ${styles.benefitsBar}`}
       data-benefits-bar-variant={appearance?.variant ?? 'dark'}
+      data-benefits-bar-sticky={isSticky || undefined}
       style={getColorStyle(appearance)}
     >
       <div className="layout__content" data-benefits-bar-content>

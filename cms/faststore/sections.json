@@ -11,6 +11,12 @@
           "title": "Apariencia",
           "type": "object",
           "properties": {
+            "sticky": {
+              "title": "Fijar arriba al hacer scroll",
+              "description": "La franja queda visible mientras se baja en el sitio. Si hay varias franjas fijas, se apilan en el orden del CMS",
+              "type": "boolean",
+              "default": true
+            },
             "variant": {
               "title": "Estilo",
               "type": "string",
