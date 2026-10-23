@@ -20,7 +20,7 @@ module.exports = {
     storeId: "eduardofuentes",
     workspace: "master",
     environment: "vtexcommercestable",
-    hideUnavailableItems: true,
+    hideUnavailableItems: false,
     incrementAddress: false,
   },
 

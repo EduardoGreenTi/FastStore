@@ -1,0 +1,14 @@
+input AvailabilitySubscriptionInput {
+  email: String!
+  skuId: String!
+  sellerId: String
+  locale: String
+}
+
+type Mutation {
+  """
+  Registers a "notify me when available" request in the
+  vtex.availability-notify app, which emails the shopper on restock.
+  """
+  subscribeToAvailability(input: AvailabilitySubscriptionInput!): Boolean!
+}

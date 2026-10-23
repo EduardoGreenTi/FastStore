@@ -1,0 +1,24 @@
+@use "sass:meta";
+
+@layer components {
+  .notifyMe {
+    @include meta.load-css("~@faststore/ui/src/components/molecules/InputField/styles.scss");
+    @include meta.load-css("~@faststore/ui/src/components/organisms/OutOfStock/styles.scss");
+
+    width: 100%;
+
+    &[data-notify-me-success] {
+      display: flex;
+      gap: var(--fs-spacing-2);
+      align-items: center;
+      padding: var(--fs-spacing-3);
+      color: var(--fs-color-success-text);
+      background-color: var(--fs-color-success-bkg);
+      border-radius: var(--fs-border-radius);
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
